@@ -1,0 +1,21 @@
+DB:
+  Host: "localhost"
+  Username: "postgres"
+  Password: "postgrespw"
+  DBName: "MusicService"
+  SSLMode: "disable"
+  Port: 5432
+
+App:
+  SecretKey: "qwerty"
+  EveryDayPoint: 5
+  EveryYearPoint: 10
+  LongNoLoginPoint: 50
+  LongNoLoginHours: 4400.0
+  LoginLen: 5
+  PasswordLen: 8
+  TokenExpirationHours: 700
+
+Logger:
+  FileName: "log.bin"
+  Level: 6

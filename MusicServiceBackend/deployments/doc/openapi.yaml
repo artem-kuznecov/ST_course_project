@@ -1,0 +1,36 @@
+openapi: 3.0.0
+info:
+  title: MusicService
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: Music
+  - name: Playlist
+  - name: Album
+  - name: Author
+paths:
+  /music:
+    $ref: './resources/music.yaml#/MusicPath'
+  /playlist:
+    $ref: './resources/playlist.yaml#/PlaylistPath'
+  /user:
+    $ref:  './resources/user.yaml#/UserPath'
+  /album:
+    $ref: './resources/album.yaml#/AlbumPath'
+  /author:
+    $ref: './resources/author.yaml#/AuthorPath'
+components:
+  schemas:
+    Music:
+      $ref: './schemas/music_schema.yaml'
+    Playlist:
+      $ref: './schemas/playlist_schemas.yaml'
+    Users:
+      $ref: './schemas/user_schema.yaml'
+    Playlist_music(Many to many):
+      $ref: './schemas/playlist_music_schema.yaml'
+    Album:
+      $ref: './schemas/album_schema.yaml'
+    Author:
+      $ref: './schemas/author_schema.yaml'

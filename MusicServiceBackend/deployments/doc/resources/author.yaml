@@ -1,0 +1,33 @@
+AuthorPath:
+  get:
+    tags:
+      - Author
+    summary: Вывод одного автора(в будущем по id)
+    responses:
+      '200':
+        $ref: '../responses/success_responses.yaml'
+  post:
+    tags:
+      - Author
+    summary: Создание автора
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/author_schema.yaml'
+            example:
+              id: 1
+              title: "Pososi"
+              album: "Pososi"
+    responses:
+      '200':
+        $ref: '../responses/success_responses.yaml'
+  delete:
+    tags:
+      - Author
+    summary: Удаление автора
+    responses:
+      '200':
+        $ref: '../responses/success_responses.yaml'
+
+  

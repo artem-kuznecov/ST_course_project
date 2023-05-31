@@ -1,0 +1,66 @@
+.developers {
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
+  }
+  .icons {
+    color: #757575;
+  }
+  .icons:last-of-type {
+    margin-left: 8px;
+  }
+
+  .hidden {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+  }
+
+  .NotFound {
+    margin-left: 30%;
+    margin-top: 5%;
+  }
+
+  .avatar-box {
+    margin-right: 100px;
+  }
+
+  .avatar {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .user-stats {
+    display: flex;
+    flex-direction: column;
+  }
+
+.search-box {
+  width: 75vw;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: row;
+}
+
+.search-input {
+  /* text-decoration: none;
+  padding: 3px 5px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 24px; */
+}
+
+.search-input:focus {
+  border: none;
+}

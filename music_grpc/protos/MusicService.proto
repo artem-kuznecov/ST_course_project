@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package GRPC;
+
+message MusicRequest {
+    string uuid = 1;
+}
+
+message MetaData {
+  string filename = 1;
+  string extension = 2;
+}
+
+message AddMusicRequest {
+  oneof request {
+    MetaData metadata = 1;
+    bytes chunk_data = 2;
+  }
+}
+
+message RemoveMusicRequest {
+    string uuid = 1;
+}
+
+message MusicResponse {
+    string url = 1;
+}
+
+message AddMusicResponse {
+    bool status = 1;
+    string url = 2;
+}
+
+message RemoveMusicResponse {
+    bool status = 1;
+}
+
+service Music {
+    rpc requestMusic(MusicRequest) returns (MusicResponse) {}
+
+    rpc addMusic(stream AddMusicRequest) returns (AddMusicResponse) {}
+
+    rpc removeMusic(RemoveMusicRequest) returns (RemoveMusicResponse) {}
+}

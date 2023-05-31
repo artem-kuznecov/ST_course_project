@@ -1,0 +1,30 @@
+PlaylistPath:
+  get:
+    tags:
+      - Playlist
+    summary: Вывод плейлиста пользователя
+    responses:
+      '200':
+        $ref: '../responses/success_responses.yaml'
+  post:
+    tags:
+      - Playlist
+    summary: Добавление музыки в плейлист
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/playlist_schemas.yaml'
+            example:
+              id: 1
+              user_id: 1
+    responses:
+      '200':
+        $ref: '../responses/success_responses.yaml'
+  delete:
+    tags:
+      - Playlist
+    summary: Удаление музыки из плейлиста
+    responses:
+      '200':
+        $ref: '../responses/success_responses.yaml'

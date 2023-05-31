@@ -1,0 +1,27 @@
+AlbumPath:
+  get:
+    tags:
+      - Album
+    summary: Вывод альбомов определенного имполнителя
+    responses:
+    '200':
+      $ref: '../responses/success_responses.yaml'
+  post:
+    tags:
+      - Album
+    summary: Добавление альбома исполнителя (только свой альбом)
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/album_schema.yaml'
+    responses:
+      '200':
+        $ref: '../responses/success_responses.yaml'
+  delete:
+    tags:
+      - Album
+    summary: Удаление альбома исполнителя (только свой альбом)
+    responses:
+      '200':
+        $ref: '../responses/success_responses.yaml'

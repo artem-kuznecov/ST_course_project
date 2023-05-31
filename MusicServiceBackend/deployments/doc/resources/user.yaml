@@ -1,0 +1,20 @@
+UserPath:
+  get:
+    tags:
+      - User
+    summary: Вывод пользователя
+    responses:
+      '200':
+        $ref: '../responses/success_responses.yaml'
+  put:
+    tags:
+       - User
+    summary: Изменение данных пользователя
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/user_schema.yaml'
+    responses:
+      '200':
+        $ref: '../responses/success_responses.yaml'

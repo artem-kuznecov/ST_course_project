@@ -1,0 +1,33 @@
+Link {text-decoration: none;}
+
+.selection {
+    display: inline-flex;
+    width: 135px;
+    height: 76px;
+    margin-bottom: 30px;
+}
+.selected {
+    background-color: #7C868E;
+    box-shadow: 0px 0px 15px rgba(0,0,1, 0.4);
+    animation: 0.6s appear ease;
+}
+
+.icon {
+    margin: auto;
+    cursor: pointer;
+    color: #d4d4d4;
+}
+
+.selected-icon {
+    color: #232323;
+    animation: 0.6s appear ease;
+}
+
+@keyframes appear {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.card {
+    padding-bottom: 40px;
+}

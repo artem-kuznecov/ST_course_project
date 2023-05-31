@@ -1,0 +1,31 @@
+MusicPath:
+  get:
+    tags:
+      - Music
+    summary: Вывод последних 10 добавленных треков из всего хранилища
+    responses:
+      '200':
+        $ref: '../responses/success_responses.yaml'
+  post:
+    tags:
+      - Music
+    summary: Добавление музыки в хранилище
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/music_schema.yaml'
+            example:
+              id: 1
+              title: "Pososi"
+              album: "Pososi"
+    responses:
+      '200':
+        $ref: '../responses/success_responses.yaml'
+  delete:
+      tags:
+        - Music
+      summary: Удаление музыки из хранилища
+      responses:
+        '200':
+          $ref: '../responses/success_responses.yaml'

@@ -1,0 +1,17 @@
+type: object
+required:
+  - id
+  - music_id
+  - playlist_id
+  - adedat
+properties:
+  id:
+    type: integer
+  music_id:
+    type: integer
+  playlist_id:
+    type: integer
+  adedat:
+    type: string
+    format: date-time
+  
