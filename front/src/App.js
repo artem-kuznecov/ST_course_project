@@ -6,11 +6,7 @@ import Layout from './hocs/Layout';
 import Login from './containers/Login';
 import Library from './containers/Library';
 import Profile from './containers/Profile';
-// import AddSong from './containers/AddSongs';
-import NewAdding from './containers/NewAdding';
-
 import UploadSong from './containers/UploadSong';
-import UploadTest from './containers/UploadTest';
 
 
 
@@ -24,7 +20,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/playlist' element={<Playlist />} />
           <Route path='/library' element={<Library />} />
-          <Route path='/library/add' element={<UploadTest />} />
+          <Route path='/library/add' element={<UploadSong />} />
           <Route path='/profile' element={<Profile />} />
         </Routes>
       </Layout>

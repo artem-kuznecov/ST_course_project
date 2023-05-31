@@ -3,7 +3,7 @@ import { Grid, ThemeProvider, Typography } from '@mui/material'
 import { SongCard } from '../components/SongCard'
 import { ErrorSnack } from '../components/NotificationsStandarts'
 
-import { InputField, Search } from '../components/InputFieldStandart';
+import { Search } from '../components/InputFieldStandart';
 import { theme } from '../components/CustomTheme';
 
 
@@ -11,31 +11,31 @@ import { theme } from '../components/CustomTheme';
 import { SideBar } from '../components/Navbars'
 import axios from 'axios'
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { setPlaylist } from '../store/musicSlice';
 
-const array = [
-    {
-        id: 1,
-        title: 'one',
-        author: 'Drake',
-        file: 'http://127.0.0.1:9000/music/savage-creepin.mp3',
-        img: 'https://upload.wikimedia.org/wikipedia/en/7/70/Drake_-_More_Life_cover.jpg'
-    },
-    {
-        id: 2,
-        title: 'two',
-        author: 'asap ferg',
-        file: 'http://127.0.0.1:9000/music/savage-creepin.mp3',
-        img: 'https://www.levelman.com/content/images/2022/11/scorpion.jpg'
-    },
-]
+// const array = [
+//     {
+//         id: 1,
+//         title: 'one',
+//         author: 'Drake',
+//         file: 'http://127.0.0.1:9000/music/savage-creepin.mp3',
+//         img: 'https://upload.wikimedia.org/wikipedia/en/7/70/Drake_-_More_Life_cover.jpg'
+//     },
+//     {
+//         id: 2,
+//         title: 'two',
+//         author: 'asap ferg',
+//         file: 'http://127.0.0.1:9000/music/savage-creepin.mp3',
+//         img: 'https://www.levelman.com/content/images/2022/11/scorpion.jpg'
+//     },
+// ]
 
 const Playlist = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const [searchValue, setSearchValue] = useState('');
     const wumpus = useSelector(state => state.music.wumpusTexts)
-    const [isFound, setFound] = useState(false)
+    // const [isFound, setFound] = useState(false)
     // const [rand, setRand] = useState()
 
     const authState = useSelector(state => state.auth)
@@ -61,9 +61,6 @@ const Playlist = () => {
         // setRand(Math.floor(Math.random() * (3 - 0 + 0)) + 0)
         async function GetPlaylist() {
             try {
-                const headers = {
-                    Authorization: `Bearer ${authState.access_token}`
-                };
 
                 // await fetch(`${state.hostUrl}/playlist`, {
                 //     method: 'GET',
@@ -131,8 +128,7 @@ const Playlist = () => {
                         )
                 })}
             </Grid>
-            <button onClick={() => console.log(snackOpener)}>ldbvibfe</button>
-            <img className={snackOpener.isRequestCompleted && musicState.playlist.length != 0 ? 'hidden' : 'NotFound'} src={require('../media/images/vamp-PhotoRoom.png-PhotoRoom.png')} alt='404'/>
+            <img className={snackOpener.isRequestCompleted && musicState.playlist.length !== 0 ? 'hidden' : 'NotFound'} src={require('../media/images/vamp-PhotoRoom.png-PhotoRoom.png')} alt='404'/>
             <Typography className={snackOpener.isRequestCompleted ? 'hidden' : 'NotFound'} fontSize={28} fontWeight={'bolder'} marginY={'auto'} sx={{ marginLeft: '550px', color: '#757575' }}>{wumpus[Math.floor(Math.random() * (3 - 0 + 0)) + 0]}</Typography>
             <ErrorSnack alert_text={snackOpener.text} isOpen={snackOpener.isOpen} handleClose={() => setSnackOpener({isOpen: false, isRequestCompleted: false, text: snackOpener.text})}/>
         </div>

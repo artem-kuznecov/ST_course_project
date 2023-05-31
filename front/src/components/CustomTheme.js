@@ -1,29 +1,16 @@
 import { createTheme, styled } from '@mui/material/styles';
 import { TextField } from '@mui/material';
-import MailIcon from '@mui/icons-material/Mail';
 
 export const CustomTextField = styled(TextField)({
-  // '& .MuiInput-underline': {
-  //     borderBottomColor: 'blue',
-  // },
   '& .MuiInput-underline:before': {
     borderBottomColor: 'white',
   },
-  // '& .MuiInput-underline:after': {
-  //     borderBottomColor: 'white',
-  // },
 });
 
 export const CustomSearchField = styled(TextField)({
-  // '& .MuiInput-underline': {
-  //     borderBottomColor: 'blue',
-  // },
   '& .MuiInput-underline:before': {
     borderBottomColor: '#757575',
   },
-  // '& .MuiInput-underline:after': {
-  //     borderBottomColor: 'white',
-  // },
 });
 
 export const theme = createTheme({

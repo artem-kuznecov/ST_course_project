@@ -1,99 +1,134 @@
-import React, { useState } from 'react'
-import { ThemeProvider, styled } from '@mui/material/styles';
+import React, { useState, useRef } from 'react'
+import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../components/CustomTheme';
-import { Typography, Box, Button, Grid, Paper, CardMedia, Card, TextField } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 import { SideBar } from '../components/Navbars';
-import { Link } from 'react-router-dom';
-
+import { ErrorSnack } from '../components/NotificationsStandarts';
 import { InputField } from '../components/InputFieldStandart';
-import { CustomTextField } from '../components/CustomTheme';
+import { useSelector } from 'react-redux';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { PostMusicThunk } from '../store/musicSlice';
-
-import axios from 'axios';
 
 const UploadSong = () => {
+    const [isSnackOpen, setSnackopen] = useState(false)
+    const [snackText, setSnackText] = useState(null)
+
     const state = useSelector(state => state.auth)
-    const [file, setFile] = useState();
+    const filePicker = useRef(null)
+    const [selectedFile, setSelectedFile] = useState(null)
+    const [name, setName] = useState(null)
+    const [image, setImage] = useState(null)
 
-    const [requestData, setRequestData] = useState({
-        title: '',
-        img: '',
-        author: state.user_id,
-    })
-    const {title, img, author} = requestData
+    const nameHandler = (e) => {
+        setName(e.target.value)
+    }
 
-    const titleHandler = e => setRequestData({...requestData, [e.target.name]: e.target.value})
+    const imageHandler = (e) => {
+        setImage(e.target.value)
+        console.log(name);
+    }
 
-    // отправялем запрос
-    const request = async () => {
-        const headers = {
-            Authorization: `Bearer ${state.access_token}`
+    const handlePick = () => {
+        filePicker.current.click();
+    }
+
+    const handleChange = (event) => {
+        console.log(event.target.files);
+        setSelectedFile(event.target.files[0])
+    }
+
+    const handleUpload = async () => {
+        if (!selectedFile) {
+            setSnackText('Пожалуйста, выберите файл')
+            setSnackopen(true)
+            return
         }
-        const body = {title, img, author, file}
-        console.log('request data:', body);
-        // отправляем файл
-        // const fileResponse = await axios.post('https://b5db-46-160-226-131.ngrok-free.app/music', file, headers)
-        // отправляем данные
-        const attrResponse = await axios.post('https://b5db-46-160-226-131.ngrok-free.app/music', body, headers)
 
-        // const fileData = fileResponse.json();
-        const attrData = attrResponse.json();
+        const formData = new FormData();
+        formData.append('file', selectedFile)
+        formData.append('title', name)
+        formData.append('img', image)
 
-        // console.log('fileData > ', fileData);
-        console.log('attrData > ', attrData);
+        console.log('request body', formData);
+
+        try {
+            const res = await fetch (`${state.hostUrl}/music`, {
+                headers: {
+                    Authorization: `Bearer ${state.access_token}`
+                },
+                method: 'POST',
+                body: formData
+            })
+    
+            const data = await res.json()
+
+            if (data) {
+                console.log('data', data);
+            } else {
+                setSnackText('Не удалось загрузить трек. Проверьте соединение')
+                setSnackopen(true)
+            }
+        } catch (err) {
+            setSnackText('Не удалось загрузить трек. Проверьте соединение')
+            setSnackopen(true)
+        }
     }
 
     return (
-    <ThemeProvider theme={theme}>
-                <div className='wrapper'>
-                    <SideBar />
-                    <div className='content' style={{ display: 'flex', flexDirection: 'column' }}>
-                        <div className='header'>
-                            <Typography
-                                fontSize={48}
-                                fontWeight={'bolder'}
-                                marginY={'auto'}
-                            >Добавление трека</Typography>      
-                        </div>
-
-                        {/* Вводим файлы музыки */}
-                        <input id="fusk" type="file" name="song" accept='.mp3' style={{ display: 'none' }} onChange={(event) => {setFile(event.target.files[0]); console.log(event.target.files[0]);}}></input>
-                        <label
-                            className='file-label'
-                            htmlFor="fusk" 
-                            style={{
-                                color: 'white',
-                                width: '300px',
-                                // display: '',
-                                backgroundColor: '#757575',
-                                padding: '8px 8px',
-                                borderRadius: '6px',
-                                cursor: 'pointer' 
-                            }}
-                        >{file ? `${file.name}` : 'Выберите файлы в формате MP3'}</label><br/>
-
-                        <InputField header_name='Название трека' elem_type='text' elem_name='title' handler={titleHandler}/>
-                        <InputField header_name='Ссылка на изображение (обложку)' elem_type='text' elem_name='img' handler={titleHandler}/>
-                        
-                        
-                        <Button
-                            id='test_button'
-                            // type='submit'
-                            color='newone'
-                            variant="contained"
-                            sx={{
-                                width: '250px',
-                                textTransform: 'uppercase',
-                                fontSize: 12, color: '#232323',
-                                marginTop: '10px',
-                                fontWeight: 'bold'
-                            }}
-                            onClick={request}
-                        >Загрузить</Button>
+        <ThemeProvider theme={theme}>
+            <div className='wrapper'>
+                <SideBar />
+                <div className='content' style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div className='header'>
+                        <Typography
+                            fontSize={48}
+                            fontWeight={'bolder'}
+                            marginY={'auto'}
+                        >Добавление трека</Typography>      
                     </div>
+
+                    {/* Вводим файлы музыки */}
+                    <Button
+                        color='grey'
+                        variant="contained"
+                        sx={{
+                            width: '250px',
+                            textTransform: 'uppercase',
+                            fontSize: 12, color: '#232323',
+                            marginTop: '10px',
+                            fontWeight: 'bold'
+                        }}
+                        onClick={handlePick}
+                    >{ selectedFile ? `${selectedFile.name}` : 'Выбрать файл' }</Button>
+                    <input
+                        className='hidden'
+                        type="file"
+                        accept='.mp3'
+                        ref={filePicker}
+                        onChange={handleChange}
+                    ></input>
+
+                    <InputField header_name='Название трека' elem_type='text' elem_name='title' handler={nameHandler} mT='30px' />
+
+                    <InputField header_name='Ссылка на изображение (обложку)' elem_type='text' elem_name='img' handler={imageHandler} mT='15px'/>
+                    <p></p>
+                    
+                    <Button
+                        id='test_button'
+                        // type='submit'
+                        color='newone'
+                        variant="contained"
+                        sx={{
+                            width: '250px',
+                            textTransform: 'uppercase',
+                            fontSize: 12, color: '#232323',
+                            marginTop: '10px',
+                            fontWeight: 'bold'
+                        }}
+                        onClick={handleUpload}
+                    >Загрузить</Button>
+                    <ErrorSnack alert_text={snackText} isOpen={isSnackOpen} handleClose={() => setSnackopen(false)}/>
                 </div>
+            </div>
         </ThemeProvider>
     )
 }
