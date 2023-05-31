@@ -1,8 +1,8 @@
-[INFO]: 2023-05-29 13:35:44 - PostgreSQL запущена на localhost:5432 
+[INFO]: 2023-05-31 15:10:59 - PostgreSQL запущена на localhost:5432 
 
-[INFO]: 2023-05-29 13:35:44 - Redis запущен на localhost:6379 
+[INFO]: 2023-05-31 15:10:59 - Redis запущен на localhost:6379 
 
-[INFO]: 2023-05-29 13:35:44 - Клиент gRPC подключен к серверу на localhost:50051 
+[INFO]: 2023-05-31 15:10:59 - Клиент gRPC подключен к серверу на localhost:50051 
 
-[INFO]: 2023-05-29 13:35:44 - Запуск сервера на localhost:8080
+[INFO]: 2023-05-31 15:10:59 - Запуск сервера на localhost:8080
 [WARNING]: 2023-05-29 13:20:46 - register user err db: ERROR: value too long for type character varying(255) (SQLSTATE 22001)
